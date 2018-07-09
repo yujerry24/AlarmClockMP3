@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                setAlarmText("Alarm Off");
+                setAlarmText("Alarm Offs");
 
             }
         });
