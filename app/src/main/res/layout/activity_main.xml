@@ -58,14 +58,13 @@
 
     <TextView
         android:id="@+id/AlarmCheck"
-        android:layout_width="112dp"
+        android:layout_width="192dp"
         android:layout_height="30dp"
         android:layout_marginBottom="34dp"
         android:text="@string/alarm_set"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TimePicker" />
 
