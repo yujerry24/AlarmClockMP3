@@ -44,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
         startAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                calendar.set(Calendar.HOUR,timePicker.getHour());
+                calendar.set(Calendar.MINUTE, timePicker.getMinute());
+
+                int hour = timePicker.getHour();
+                int minute = timePicker.getMinute();
+
+                String hourString = String.valueOf(hour);
+                String minuteString = String.valueOf(minute);
+
+                if (minute < 10) {
+                    minuteString = "0" + String.valueOf(minute);
+                }
 
                 setAlarmText("Alarm On");
             }
@@ -58,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

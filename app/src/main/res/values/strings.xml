@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="set_alarm">Set Alarm</string>
     <string name="end_alarm">End Alarm</string>
+    <string name="alarm_set">Alarm Set</string>
 </resources>
