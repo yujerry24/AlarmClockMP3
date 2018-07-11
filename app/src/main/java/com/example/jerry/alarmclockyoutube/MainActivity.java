@@ -1,9 +1,11 @@
 package com.example.jerry.alarmclockyoutube;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,16 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button startAlarm = (Button) findViewById(R.id.AlarmOn);
 
-       final Intent myIntent = new Intent(MainActivity.this,AlarmReciever.class);
+       final Intent myIntent = new Intent(this.context,AlarmReciever.class);
 
         startAlarm.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
+
             @Override
             public void onClick(View view) {
+                int hour = timePicker.getHour();
+                int minute = timePicker.getMinute();
+
+
                 calendar.set(Calendar.HOUR,timePicker.getHour());
                 calendar.set(Calendar.MINUTE, timePicker.getMinute());
 
-                int hour = timePicker.getHour();
-                int minute = timePicker.getMinute();
+
 
                 String hourString = String.valueOf(hour);
                 String minuteString = String.valueOf(minute);
@@ -66,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 setAlarmText("Alarm On: " + hourString +":"+minuteString);
+
+                myIntent.putExtra("extra", "alarm on");
 
                 pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 
@@ -80,7 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
                 setAlarmText("Alarm Off");
 
+                assert(pendingIntent!=null);
+
                 alarmManager.cancel(pendingIntent);
+
+                myIntent.putExtra("extra", "off");
+
+                sendBroadcast(myIntent);
 
             }
         });
@@ -114,4 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
