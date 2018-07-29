@@ -11,7 +11,7 @@ public class AlarmReciever extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e("We are in!","Lol");
+        Log.e("We are in!","Finally");
 
         String getString = intent.getExtras().getString("extra");
 

@@ -49,36 +49,37 @@ public class MainActivity extends AppCompatActivity {
 
         Button startAlarm = (Button) findViewById(R.id.AlarmOn);
 
-       final Intent myIntent = new Intent(this.context,AlarmReciever.class);
+       final Intent myIntent = new Intent(MainActivity.this,AlarmReciever.class);
 
         startAlarm.setOnClickListener(new View.OnClickListener() {
+
             @TargetApi(Build.VERSION_CODES.M)
 
-            @Override
-            public void onClick(View view) {
+                @Override
+                public void onClick(View view) {
+
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
+                String minuteString=String.valueOf(minute);
 
                 calendar.set(Calendar.HOUR,timePicker.getHour());
                 calendar.set(Calendar.MINUTE, timePicker.getMinute());
 
 
-
-                String hourString = String.valueOf(hour);
-                String minuteString = String.valueOf(minute);
-
                 if (minute < 10) {
                     minuteString = "0" + String.valueOf(minute);
                 }
 
-                setAlarmText("Alarm On: " + hourString +":"+minuteString);
+                setAlarmText("Alarm On: " + hour +":"+minuteString);
+
+                Log.e("We have reached:  ", "Alarm On Button");
 
                 myIntent.putExtra("extra", "alarm on");
 
                 pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             }
         });
 
