@@ -58,20 +58,30 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
+                // setting calendar instance with the hour and minute that we picked
+                // on the time picker
+                calendar.set(java.util.Calendar.HOUR_OF_DAY, timePicker.getHour());
+                calendar.set(java.util.Calendar.MINUTE, timePicker.getMinute());
+
+                // get the int values of the hour and minute
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                String minuteString=String.valueOf(minute);
+                // convert the int values to strings
+                String hour_string = String.valueOf(hour);
+                String minute_string = String.valueOf(minute);
 
-                calendar.set(Calendar.HOUR,timePicker.getHour());
-                calendar.set(Calendar.MINUTE, timePicker.getMinute());
-
-
-                if (minute < 10) {
-                    minuteString = "0" + String.valueOf(minute);
+                // convert 24-hour time to 12-hour time
+                if (hour > 12) {
+                    hour_string = String.valueOf(hour - 12);
                 }
 
-                setAlarmText("Alarm On: " + hour +":"+minuteString);
+                if (minute < 10) {
+                    //10:7 --> 10:07
+                    minute_string = "0" + String.valueOf(minute);
+                }
+
+                setAlarmText("Alarm On: " + hour +":"+minute_string);
 
                 Log.e("We have reached:  ", "Alarm On Button");
 
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             }
         });
 
@@ -87,12 +97,14 @@ public class MainActivity extends AppCompatActivity {
         endAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
                 setAlarmText("Alarm Off");
 
-                assert(pendingIntent!=null);
 
-                alarmManager.cancel(pendingIntent);
+
+                if(pendingIntent!=null) {
+                    alarmManager.cancel(pendingIntent);
+                }
 
                 myIntent.putExtra("extra", "off");
 
