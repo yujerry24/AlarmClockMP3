@@ -4,4 +4,5 @@
     <string name="set_alarm">Set Alarm</string>
     <string name="end_alarm">End Alarm</string>
     <string name="alarm_set">Alarm Set</string>
+    <string name="author">Built by Jerry Yu</string>
 </resources>

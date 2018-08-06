@@ -58,13 +58,13 @@ public class RingtonePlayingService extends Service {
 
         NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
 
-        bigText.setBigContentTitle("Today's Bible Verse");
-        bigText.setSummaryText("Text in detail");
+        bigText.setBigContentTitle("An alarm is going off");
+        bigText.setSummaryText("Click me!");
 
         mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
-        mBuilder.setContentTitle("Your Title");
-        mBuilder.setContentText("Your text");
+        mBuilder.setSmallIcon(R.drawable.notif);
+        mBuilder.setContentTitle("An alarm is going off");
+        mBuilder.setContentText("Click me");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
         mBuilder.setStyle(bigText);
 
@@ -79,7 +79,7 @@ public class RingtonePlayingService extends Service {
             mNotificationManager.createNotificationChannel(channel);
         }
 
-        mNotificationManager.notify(0, mBuilder.build());
+
 
         assert state != null;
         switch (state) {
@@ -102,6 +102,7 @@ public class RingtonePlayingService extends Service {
             this.isRunning=true;
             this.startId=0;
             //notifyManager.notify(0,notification);
+            mNotificationManager.notify(0, mBuilder.build());
         }
         else if (this.isRunning && startId == 0) {
             Log.e("There is music, " , " and you want end");
