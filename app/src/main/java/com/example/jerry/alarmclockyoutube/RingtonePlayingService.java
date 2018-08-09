@@ -14,6 +14,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class RingtonePlayingService extends Service {
 
     MediaPlayer mediaSong;
@@ -33,7 +35,10 @@ public class RingtonePlayingService extends Service {
 
         String state = intent.getExtras().getString("extra");
 
+        Long soundChoice =  intent.getExtras().getLong("Sound Choice");
+
         Log.e("Ringstone state: extra is ", state);
+        Log.e("Sound Choice is: ",soundChoice.toString());
 
        /* NotificationManager notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -96,13 +101,41 @@ public class RingtonePlayingService extends Service {
 
         if(!this.isRunning && startId == 1) {
             Log.e("There is no music, " , " and you want start");
-            mediaSong = MediaPlayer.create(this, R.raw.thebeach);
-            mediaSong.start();
+
 
             this.isRunning=true;
             this.startId=0;
             //notifyManager.notify(0,notification);
             mNotificationManager.notify(0, mBuilder.build());
+
+            if(soundChoice == 0){
+
+                int min = 1;
+                int max= 3;
+
+                Random rand = new Random();
+                int soundNumber = rand.nextInt(max-min+1)+min;
+                soundChoice = Long.parseLong(Integer.toString(soundNumber));
+
+            }
+            if(soundChoice == 1) {
+                mediaSong = MediaPlayer.create(this, R.raw.thebeach);
+                mediaSong.start();
+
+            }
+            else if(soundChoice == 2) {
+                mediaSong = MediaPlayer.create(this, R.raw.prey);
+                mediaSong.start();
+            }
+            else if(soundChoice == 3) {
+                mediaSong = MediaPlayer.create(this, R.raw.sweaterweather);
+                mediaSong.start();
+
+            }
+            else {
+                mediaSong = MediaPlayer.create(this, R.raw.thebeach);
+                mediaSong.start();
+            }
         }
         else if (this.isRunning && startId == 0) {
             Log.e("There is music, " , " and you want end");

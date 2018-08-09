@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     AlarmManager alarmManager;
     TimePicker  timePicker;
     TextView updateText;
+    long chooseMusic;
 
     Context context;
     PendingIntent pendingIntent;
@@ -88,7 +89,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 Log.e("We have reached:  ", "Alarm On Button");
 
+
                 myIntent.putExtra("extra", "alarm on");
+
+                myIntent.putExtra("Sound Choice", chooseMusic);
 
                 pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 
@@ -104,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         spinner.setAdapter(adapter);
 
+        spinner.setOnItemSelectedListener(this);
+
         Button endAlarm = (Button) findViewById(R.id.AlarmOff);
         endAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
 
                 myIntent.putExtra("extra", "off");
+
+                myIntent.putExtra("Sound Choice", chooseMusic);
 
                 sendBroadcast(myIntent);
 
@@ -157,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        chooseMusic = l;
     }
 
     @Override

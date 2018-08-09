@@ -7,6 +7,7 @@
     <string name="author">Built by Jerry Yu</string>
     
     <string-array name="musicarray">
+        <item>Random</item>
         <item>The Beach</item>
         <item>Prey</item>
         <item>Sweater Weather</item>

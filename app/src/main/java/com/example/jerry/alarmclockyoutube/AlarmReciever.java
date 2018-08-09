@@ -17,9 +17,15 @@ public class AlarmReciever extends BroadcastReceiver {
 
         Log.e("Key: ",getString);
 
+        Long getChoice = intent.getExtras().getLong("Sound Choice");
+
+        Log.e("Sound choice: ", getChoice.toString());
+
         Intent serviceIntent = new Intent(context, RingtonePlayingService.class);
 
         serviceIntent.putExtra("extra",getString);
+
+        serviceIntent.putExtra("Sound Choice", getChoice );
 
         context.startService(serviceIntent);
     }
