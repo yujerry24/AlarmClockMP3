@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -24,7 +27,7 @@ import org.w3c.dom.Text;
 
 import android.icu.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     AlarmManager alarmManager;
     TimePicker  timePicker;
@@ -93,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Spinner spinner = (Spinner) findViewById(R.id.selector);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.musicarray,android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
         Button endAlarm = (Button) findViewById(R.id.AlarmOff);
         endAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,4 +155,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

@@ -9,32 +9,34 @@
 
     <TextView
         android:id="@+id/authorid"
-        android:layout_width="75dp"
-        android:layout_height="47dp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/author"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/planets_spinner"
+        app:layout_constraintStart_toEndOf="@+id/selector"
         app:layout_constraintTop_toBottomOf="@+id/AlarmCheck" />
 
     <Spinner
-        android:id="@+id/planets_spinner"
+        android:id="@+id/selector"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/authorid"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/authorid"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/authorid" />
+        app:layout_constraintTop_toBottomOf="@+id/AlarmCheck" />
 
     <TimePicker
         android:id="@+id/TimePicker"
         android:layout_width="0dp"
-        android:layout_height="346dp"
+        android:layout_height="0dp"
         android:layout_marginTop="17dp"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/AlarmOn"
@@ -45,10 +47,10 @@
     <Button
         android:id="@+id/AlarmOn"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="55dp"
 
         android:layout_marginBottom="15dp"
-        android:layout_marginEnd="174dp"
+        android:layout_marginEnd="71dp"
         android:layout_marginStart="16dp"
         android:text="@string/set_alarm"
         android:textSize="16sp"
@@ -62,7 +64,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="3dp"
         android:text="@string/end_alarm"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/AlarmOn"
@@ -73,7 +75,7 @@
     <TextView
         android:id="@+id/AlarmCheck"
         android:layout_width="0dp"
-        android:layout_height="49dp"
+        android:layout_height="36dp"
         android:layout_marginBottom="11dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
