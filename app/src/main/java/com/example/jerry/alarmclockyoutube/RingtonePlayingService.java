@@ -8,16 +8,22 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.util.Random;
+import java.util.Scanner;
 
 public class RingtonePlayingService extends Service {
-
+    File media;
     MediaPlayer mediaSong;
     boolean isRunning;
     int startId;
@@ -30,7 +36,18 @@ public class RingtonePlayingService extends Service {
 
     @Override
     public int onStartCommand (Intent intent, int flags, int startId) {
+        media = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+        String currentSong;
+       /* try {
+            BufferedReader reader = new BufferedReader(new FileReader(media));
+            while(reader.readLine()!=null) {
+                currentSong = reader.readLine();
+                Log.e("Current song: " ,currentSong);
+            }
 
+        }catch (Exception e) {
+            e.printStackTrace();
+        }*/
         Log.e("hello?", "hey");
 
         String state = intent.getExtras().getString("extra");

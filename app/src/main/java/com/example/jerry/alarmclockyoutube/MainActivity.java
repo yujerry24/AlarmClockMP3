@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,15 @@ import org.w3c.dom.Text;
 
 import android.icu.util.Calendar;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    File media;
 
     AlarmManager alarmManager;
     TimePicker  timePicker;
@@ -40,6 +49,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        media = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        String currentSong;
+        ArrayList<HashMap<String, String >> songsList = new ArrayList<HashMap<String, String>>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(media));
+            while(reader.readLine()!=null) {
+                currentSong = reader.readLine();
+                Log.e("Current song: " ,currentSong);
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         setContentView(R.layout.activity_main);
         this.context = this;
 
@@ -138,6 +162,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void setAlarmText(String alarm_on) {
         updateText.setText(alarm_on);
+    }
+
+    class FileExtensionFilter implements FilenameFilter
+    {
+        public boolean accept(File dir, String name)
+        {
+            return (name.endsWith(".mp3") || name.endsWith(".MP3")) || name.endsWith(".MP4") || name.endsWith(".mp4");
+        }
     }
 
     @Override
